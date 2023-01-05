@@ -10,8 +10,22 @@ ALLOWED_HOSTS = ['jamie-storefront-prod.herokuapp.com']
 
 DATABASE_URL = os.environ['JAWSDB_URL']
 
-DATABASES = {
-    'default': dj_database_url.config()
+database_attr = DATABASE_URL.split(':')
+
+JaName = database_attr[3].split('/')[1].rstrip("'")
+JaUser = database_attr[1].lstrip('//')
+JaPwrd = database_attr[2].split('@')[0]
+JaHost = database_attr[2].split('@')[1]
+JaPort = int(database_attr[3].split('/')[0])
+
+DATABASES = { 
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': JaName,
+        'USER': JaUser,
+        'PASSWORD': JaPwrd,
+        'HOST': JaHost,
+    }
 }
 
 REDIS_URL = os.environ['REDISCLOUD_URL']
