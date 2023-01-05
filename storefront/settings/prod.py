@@ -8,6 +8,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['jamie-storefront-prod.herokuapp.com']
 
+DATABASE_URL = os.environ['JAWSDB_URL']
+
 DATABASES = {
     'default': dj_database_url.config()
 }
